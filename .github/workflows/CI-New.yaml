@@ -1,0 +1,33 @@
+name: CI Pipline New
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'web/*'
+
+    pull_request:
+        branches:
+            - main
+        paths:
+            - 'web/*'
+jobs:
+
+    test:
+        name: run unit tests
+        default:
+            run:
+                shell: bash
+                working-directory: ./web
+        runs-on:
+            - ubuntu-latest
+        steps:
+
+            - uses: actions/checkout@2
+            name: checkout repository
+
+            - name: install 
+            run: npm install 
+
+            - name: 'Run Tests'
+            run: npm run test
