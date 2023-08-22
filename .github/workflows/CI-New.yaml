@@ -1,0 +1,41 @@
+name: CI Pipeline New
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./web
+
+      - name: Run Tests
+        run: npm run test
+        working-directory: ./web
+
+  lint:
+    name: Run Linter
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./web
+
+      - name: Run Linter
+        run: npx standard -v
