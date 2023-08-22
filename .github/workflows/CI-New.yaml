@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - main
-    
   pull_request:
     branches:
       - main
-  
 
 jobs:
   test:
@@ -26,3 +24,17 @@ jobs:
       - name: Run Tests
         run: npm run test
         working-directory: ./web
+
+  lint:
+    name: Run Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Run Linter
+        run: npx standard -v
